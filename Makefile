@@ -15,7 +15,7 @@ MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
 LIBFT = $(LIBFT_DIR)/libft.a
 
 # === Source Files ===
-SRC = so_long.c map.c utils.c render.c movement.c validation.c \
+SRC = so_long.c map.c utils.c render.c movement.c validation.c flood_fill.c\
 	  $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c \
 	  printf/ft_printf.c printf/ft_printf_func.c
 

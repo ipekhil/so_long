@@ -30,6 +30,8 @@ typedef struct s_game
     int     moves;
     int     collectibles;
     int     collected;
+    int     count;
+    int     exit_reached;
     t_textures  textures;
 
 }	t_game;
@@ -49,4 +51,8 @@ void    move_player(t_game *game, int dx, int dy);
 void	exit_game(t_game *game);
 int key_hook(int keycode, t_game *game);
 
+
+char	**copy_map(t_game *game);
+void    flood_fill(t_game *game, char **map, int row, int col);
+void    flood_fill_controller(t_game *game);
 #endif

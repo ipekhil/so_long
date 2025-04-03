@@ -6,7 +6,6 @@ void	free_map(char **map)
 
 	if (!map)
 		return ;
-    
     i = 0;
 	while (map[i])
 		free(map[i++]);
@@ -33,8 +32,7 @@ void	exit_game(t_game *game)
 	exit(0);
 }
 
-int	handle_error
-(char *msg, char **map, int exit_mode)
+int	handle_error(char *msg, char **map, int exit_mode)
 {
 	ft_printf("Error: %s\n", msg);
 	if (map)
@@ -51,8 +49,8 @@ void	init_textures(t_game *game)
 
 	game -> textures.floor = mlx_xpm_file_to_image(game -> mlx, "textures/floor.xpm", &img_width, &img_height);
 	game -> textures.player = mlx_xpm_file_to_image(game -> mlx, "textures/player.xpm", &img_width, &img_height);
-	game -> textures.exit = mlx_xpm_file_to_image(game -> mlx, "textures/exit2.xpm", &img_width, &img_height);
-	game -> textures.wall = mlx_xpm_file_to_image(game -> mlx, "textures/wall3.xpm", &img_width, &img_height);	
-	game -> textures.collect = mlx_xpm_file_to_image(game -> mlx, "textures/collectible.xpm", &img_width, &img_height);	
+	game -> textures.exit = mlx_xpm_file_to_image(game -> mlx, "textures/exit6.xpm", &img_width, &img_height);
+	game -> textures.wall = mlx_xpm_file_to_image(game -> mlx, "textures/wall5.xpm", &img_width, &img_height);	
+	game -> textures.collect = mlx_xpm_file_to_image(game -> mlx, "textures/collectible2.xpm", &img_width, &img_height);	
 }
 

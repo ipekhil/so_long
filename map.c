@@ -96,5 +96,6 @@ int	parse_map(char	*filename, t_game	*game)
 		return (handle_error("Invalid map format.\n", game -> map, 1));
 	if (!validate_walls(game))
 		return (handle_error("Map is not enclosed by walls\n", game -> map, 1));
+	flood_fill_controller(game);
 	return (1);
 }
