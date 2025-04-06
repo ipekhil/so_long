@@ -1,24 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/06 14:38:48 by ubuntu            #+#    #+#             */
+/*   Updated: 2025/04/06 14:38:49 by ubuntu           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
+
 void	file_extension(char *filename)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (filename[i])
 		i++;
 	if (i < 4)
-		handle_error("Error: Invalid file name\n", NULL, 0);	
+		handle_error("Error: Invalid file name\n", NULL, 0);
 	i -= 4;
-	if (!(filename[i] == '.' && filename[i + 1] == 'b' && filename[i + 2] == 'e' && filename[i + 3] == 'r'))
+	if (!(filename[i] == '.' && filename[i + 1] == 'b' \
+		&& filename[i + 2] == 'e' && filename[i + 3] == 'r'))
 		handle_error("Error: Must have \".ber\" extension \n", NULL, 0);
 }
-/*
-open() → dosyayı okuma modunda açar
-get_next_line() ile satır satır okuruz
-Her satırı free() ederiz çünkü sadece saymak istiyoruz
-Okuma bittikten sonra get_next_line(fd, 1) ile static buffer’ı temizleriz
-Sonunda satır sayısı height döner
-*/
+
 int	map_height(char	*filename)
 {
 	int		fd;
@@ -29,56 +37,45 @@ int	map_height(char	*filename)
 	if (fd < 0)
 		return (0);
 	height = 0;
-	while ((line = get_next_line(fd, 0)))
+	line = get_next_line(fd, 0);
+	while (line)
 	{
 		height++;
 		free(line);
+		line = get_next_line(fd, 0);
 	}
 	get_next_line(fd, 1);
 	close(fd);
 	return (height);
 }
-/*
-malloc ile mape yer açar
-open() → dosyayı okuma modunda açar
-get_next_line() ile satır satır okuruz heighte kadar
-satır sonlarındaki \n leri kırpıp mape atıyoruz
-Okuma bittikten sonra get_next_line(fd, 1) ile static buffer’ı temizleriz
-Sonunda mapi döner
-*/
-char	**read_map(char	*filename, int	height)
+
+char	**read_map(char	*filename, int height)
 {
-	int 	i;
+	int		i;
 	int		fd;
 	char	**map;
 	char	*line;
+
 	map = malloc(sizeof(char *) * (height + 1));
 	if (!map)
 		return (NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-	{
-		free(map);
-		return (NULL);
-	}
+		return (free(map), NULL);
+	line = get_next_line(fd, 0);
 	i = 0;
-	while ((line = get_next_line(fd, 0)) && (i < height))
+	while (line && (i < height))
 	{
-		map[i] = ft_strtrim(line, "\n");
+		map[i++] = ft_strtrim(line, "\n");
 		free(line);
-		i++;
+		line = get_next_line(fd, 0);
 	}
 	map[i] = NULL;
 	get_next_line(fd, 1);
 	close(fd);
 	return (map);
 }
-/*
-map_height() → satır sayısını buluyor
-read_map() → haritayı satır satır okuyup game->map içine yazıyor
-game->width = ft_strlen(game->map[0]) ile genişlik hesaplanıyor
-Sonra validate_map(game) çağrılıyor
-*/
+
 int	parse_map(char	*filename, t_game	*game)
 {
 	file_extension(filename);

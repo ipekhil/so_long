@@ -91,7 +91,7 @@ char	*ft_get_left_line(char *buff)
 	return (rst);
 }
 
-char	*get_next_line(int fd, int	mode)
+char	*get_next_line(int fd, int mode)
 {
 	static char	*buff;
 	char		*line;
@@ -102,7 +102,6 @@ char	*get_next_line(int fd, int	mode)
 		buff = NULL;
 		return (NULL);
 	}
-	
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buff = ft_read_line(buff, fd);
