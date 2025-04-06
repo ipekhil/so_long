@@ -6,13 +6,13 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 14:38:55 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/04/06 14:38:56 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/04/06 15:35:57 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	put_image(t_game	*game, void *img, int col, int row)
+static void	put_image(t_game	*game, void *img, int col, int row)
 {
 	mlx_put_image_to_window(game -> mlx, game -> win, img, col * 64, row * 64);
 }

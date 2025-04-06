@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 14:39:05 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/04/06 14:59:45 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/04/06 16:04:43 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,23 @@ int	handle_exit(void *parameter)
 void	exit_game(t_game *game)
 {
 	free_map(game -> map);
-	mlx_destroy_image(game -> mlx, game ->textures.collect);
-	mlx_destroy_image(game -> mlx, game ->textures.exit);
-	mlx_destroy_image(game -> mlx, game ->textures.floor);
-	mlx_destroy_image(game -> mlx, game ->textures.player);
-	mlx_destroy_image(game -> mlx, game ->textures.wall);
-	mlx_destroy_window(game -> mlx, game -> win);
-	mlx_destroy_display(game -> mlx);
-	free(game -> mlx);
+	if (game->textures.collect)
+		mlx_destroy_image(game -> mlx, game ->textures.collect);
+	if (game->textures.exit)
+		mlx_destroy_image(game -> mlx, game ->textures.exit);
+	if (game->textures.floor)
+		mlx_destroy_image(game -> mlx, game ->textures.floor);
+	if (game->textures.player)
+		mlx_destroy_image(game -> mlx, game ->textures.player);
+	if (game->textures.wall)
+		mlx_destroy_image(game -> mlx, game ->textures.wall);
+	if (game->win)
+		mlx_destroy_window(game -> mlx, game -> win);
+	if (game->mlx)
+	{
+		mlx_destroy_display(game -> mlx);
+		free(game -> mlx);
+	}
 	exit(0);
 }
 

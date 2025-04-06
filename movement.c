@@ -6,28 +6,13 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 14:38:53 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/04/06 14:38:54 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/04/06 16:04:52 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	key_hook(int keycode, t_game	*game)
-{
-	if (keycode == 65307)
-		exit_game(game);
-	else if (keycode == 119)
-		move_player(game, 0, -1);
-	else if (keycode == 115)
-		move_player(game, 0, 1);
-	else if (keycode == 97)
-		move_player(game, -1, 0);
-	else if (keycode == 100)
-		move_player(game, 1, 0);
-	return (0);
-}
-
-void	update_player_position(t_game *game, int new_x, int new_y)
+static void	update_player_position(t_game *game, int new_x, int new_y)
 {
 	game->map[game->player_y][game->player_x] = '0';
 	game->map[new_y][new_x] = 'P';
@@ -37,7 +22,7 @@ void	update_player_position(t_game *game, int new_x, int new_y)
 	ft_printf("Moves: %d\n", game -> moves);
 }
 
-int	handler(t_game	*game, int new_x, int new_y)
+static int	handler(t_game	*game, int new_x, int new_y)
 {
 	if (game -> map[new_y][new_x] == 'C' && (game -> collectibles--))
 	{
@@ -61,7 +46,7 @@ int	handler(t_game	*game, int new_x, int new_y)
 	return (1);
 }
 
-void	move_player(t_game *game, int dx, int dy)
+static void	move_player(t_game *game, int dx, int dy)
 {
 	int	new_x;
 	int	new_y;
@@ -77,4 +62,19 @@ void	move_player(t_game *game, int dx, int dy)
 		return ;
 	update_player_position(game, new_x, new_y);
 	render(game);
+}
+
+int	key_hook(int keycode, t_game	*game)
+{
+	if (keycode == 65307)
+		exit_game(game);
+	else if (keycode == 119)
+		move_player(game, 0, -1);
+	else if (keycode == 115)
+		move_player(game, 0, 1);
+	else if (keycode == 97)
+		move_player(game, -1, 0);
+	else if (keycode == 100)
+		move_player(game, 1, 0);
+	return (0);
 }

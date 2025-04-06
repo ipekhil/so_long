@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 14:38:58 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/04/06 14:38:59 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/04/06 15:55:55 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int	main(int argc, char **argv)
 	if (!game.textures.player || !game.textures.wall || !game.textures.floor
 		|| !game.textures.collect || !game.textures.exit)
 	{
-		write(2, "Error\nGörsel yüklenemedi.\n", 27);
-		exit(1);
+		ft_printf("Error\nImage could not be loaded.\n");
+		exit_game(&game);
 	}
 	render(&game);
 	mlx_hook(game.win, 17, 0, handle_exit, &game);

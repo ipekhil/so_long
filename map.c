@@ -6,13 +6,13 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 14:38:48 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/04/06 14:38:49 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/04/06 15:28:03 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	file_extension(char *filename)
+static int	file_extension(char *filename)
 {
 	int	i;
 
@@ -20,14 +20,15 @@ void	file_extension(char *filename)
 	while (filename[i])
 		i++;
 	if (i < 4)
-		handle_error("Error: Invalid file name\n", NULL, 0);
+		return (0);
 	i -= 4;
 	if (!(filename[i] == '.' && filename[i + 1] == 'b' \
 		&& filename[i + 2] == 'e' && filename[i + 3] == 'r'))
-		handle_error("Error: Must have \".ber\" extension \n", NULL, 0);
+		return (0);
+	return (1);
 }
 
-int	map_height(char	*filename)
+static int	map_height(char	*filename)
 {
 	int		fd;
 	int		height;
@@ -49,7 +50,7 @@ int	map_height(char	*filename)
 	return (height);
 }
 
-char	**read_map(char	*filename, int height)
+static char	**read_map(char	*filename, int height)
 {
 	int		i;
 	int		fd;
@@ -78,7 +79,9 @@ char	**read_map(char	*filename, int height)
 
 int	parse_map(char	*filename, t_game	*game)
 {
-	file_extension(filename);
+	if (!file_extension(filename))
+		return (handle_error("Invalid file name or \
+			missing .ber extension", NULL, 1));
 	initialize_game_values(game);
 	game -> height = map_height(filename);
 	if (game -> height == 0)

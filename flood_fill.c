@@ -6,13 +6,13 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 14:38:43 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/04/06 14:48:34 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/04/06 15:56:38 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	**copy_map(t_game *game)
+static char	**copy_map(t_game *game)
 {
 	char	**copy;
 	int		i;
@@ -32,10 +32,11 @@ char	**copy_map(t_game *game)
 			return (NULL);
 		}
 	}
+	copy[i] = NULL;
 	return (copy);
 }
 
-void	flood_fill(t_game *game, char **map, int row, int col)
+static void	flood_fill(t_game *game, char **map, int row, int col)
 {
 	if (row < 0 || col < 0 || row >= game -> height || col >= game -> width)
 		return ;

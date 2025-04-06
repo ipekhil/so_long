@@ -6,13 +6,13 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 14:39:08 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/04/06 14:39:09 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/04/06 16:00:06 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_map_cell(t_game *game, int row, int col, int *counts)
+static int	check_map_cell(t_game *game, int row, int col, int *counts)
 {
 	if (game -> map[row][col] == 'P')
 	{
