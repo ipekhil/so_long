@@ -1,12 +1,12 @@
 NAME = so_long
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 MLX_DIR = ./mlx
 LIBFT_DIR = ./libft
 GNL_DIR = ./get_next_line
 
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 LIBFT = $(LIBFT_DIR)/libft.a
 
 SRC = so_long.c map.c utils.c render.c movement.c validation.c flood_fill.c\

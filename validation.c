@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hiipek <hiipek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/06 14:39:08 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/04/06 16:00:06 by ubuntu           ###   ########.fr       */
+/*   Created: 2025/04/07 13:26:18 by hiipek            #+#    #+#             */
+/*   Updated: 2025/04/07 17:46:10 by hiipek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ int	validate_map(t_game *game)
 	int	col;
 	int	counts[3];
 
-	row = -1;
+	row = 0;
 	counts[0] = 0;
 	counts[1] = 0;
 	counts[2] = 0;
-	while (game -> map[++row])
+	while (row < game->height)
 	{
 		if ((int)ft_strlen(game -> map[row]) != game -> width)
 			return (0);
@@ -52,6 +52,7 @@ int	validate_map(t_game *game)
 			if (!check_map_cell(game, row, col, counts))
 				return (0);
 		}
+		row++;
 	}
 	if (counts[0] != 1 || counts[1] < 1 || counts[2] != 1)
 		return (0);
