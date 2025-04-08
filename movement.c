@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 13:25:49 by hiipek            #+#    #+#             */
-/*   Updated: 2025/04/08 08:54:47 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/04/08 11:17:16 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	update_player_position(t_game *game, int new_x, int new_y)
 	ft_printf("Moves: %d\n", game -> moves);
 }
 
-static int	handler(t_game	*game, int new_x, int new_y)
+static int	on_step(t_game	*game, int new_x, int new_y)
 {
 	if (game -> map[new_y][new_x] == 'C' && (game -> collectibles--))
 	{
@@ -55,7 +55,7 @@ static void	move_player(t_game *game, int dx, int dy)
 	new_y = game -> player_y + dy;
 	if (game -> map[new_y][new_x] != '1')
 	{
-		if (!handler(game, new_x, new_y))
+		if (!on_step(game, new_x, new_y))
 			return ;
 	}
 	else

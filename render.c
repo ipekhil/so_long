@@ -6,11 +6,28 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 13:25:55 by hiipek            #+#    #+#             */
-/*   Updated: 2025/04/08 08:54:49 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/04/08 11:20:32 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	init_textures(t_game *game)
+{
+	int	img_width;
+	int	img_height;
+
+	game -> textures.floor = mlx_xpm_file_to_image(game -> mlx,
+			"textures/floor.xpm", &img_width, &img_height);
+	game -> textures.player = mlx_xpm_file_to_image(game -> mlx,
+			"textures/player.xpm", &img_width, &img_height);
+	game -> textures.exit = mlx_xpm_file_to_image(game -> mlx,
+			"textures/exit6.xpm", &img_width, &img_height);
+	game -> textures.wall = mlx_xpm_file_to_image(game -> mlx,
+			"textures/wall5.xpm", &img_width, &img_height);
+	game -> textures.collect = mlx_xpm_file_to_image(game -> mlx,
+			"textures/collectible2.xpm", &img_width, &img_height);
+}
 
 static void	put_image(t_game	*game, void *img, int col, int row)
 {
