@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hiipek <hiipek@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 13:26:01 by hiipek            #+#    #+#             */
-/*   Updated: 2025/04/07 13:26:02 by hiipek           ###   ########.fr       */
+/*   Updated: 2025/04/08 08:55:04 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "so_long.h"
-#include <stdio.h>
 
 void	initialize_game_values(t_game *game)
 {

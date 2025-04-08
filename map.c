@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hiipek <hiipek@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 13:25:45 by hiipek            #+#    #+#             */
-/*   Updated: 2025/04/07 20:48:33 by hiipek           ###   ########.fr       */
+/*   Updated: 2025/04/08 08:54:06 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "so_long.h"
 
@@ -50,9 +49,11 @@ static int	map_height(char	*filename)
 	close(fd);
 	return (height);
 }
-static int last_line_control(char *line, char **map,int fd)
+
+static int	last_line_control(char *line, char **map, int fd)
 {
-	char *trimmed;
+	char	*trimmed;
+
 	trimmed = ft_strtrim(line, "\n");
 	if (line[ft_strlen(trimmed)] == '\n')
 	{
@@ -61,10 +62,10 @@ static int last_line_control(char *line, char **map,int fd)
 		get_next_line(fd, 1);
 		close(fd);
 		free(trimmed);
-		return 1;
+		return (1);
 	}
 	free(trimmed);
-	return 0;
+	return (0);
 }
 
 static char	**read_map(int fd, int height)
@@ -80,10 +81,10 @@ static char	**read_map(int fd, int height)
 	i = 0;
 	while (i < height)
 	{
-		if(i == height - 1)
+		if (i == height - 1)
 		{
 			map[i] = NULL;
-			if(last_line_control(line,map,fd))
+			if (last_line_control(line, map, fd))
 				return (NULL);
 		}
 		map[i] = ft_strtrim(line, "\n");
@@ -98,6 +99,8 @@ static char	**read_map(int fd, int height)
 
 int	parse_map(char	*filename, t_game	*game)
 {
+	int	fd;
+
 	if (!file_extension(filename))
 		return (handle_error("Invalid file name or \
 			missing .ber extension", NULL, 1));
@@ -105,7 +108,6 @@ int	parse_map(char	*filename, t_game	*game)
 	game -> height = map_height(filename);
 	if (game -> height == 0)
 		return (handle_error("Map height could not be determined", NULL, 1));
-	int		fd;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (0);
@@ -118,7 +120,6 @@ int	parse_map(char	*filename, t_game	*game)
 		return (handle_error("Map width is invalid\n", game -> map, 1));
 	if (!validate_map(game))
 		return (handle_error("Invalid map format.\n", game -> map, 1));
-
 	if (!validate_walls(game))
 		return (handle_error("Map is not enclosed by walls\n", game -> map, 1));
 	flood_fill_controller(game);
